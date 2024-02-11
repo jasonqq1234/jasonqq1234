@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>火車訂票</title>
+    <style>
+        /* 簡單的 CSS 样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="submit"], select {
+            padding: 8px;
+            width: calc(100% - 16px);
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .ticket-image {
+            display: none;
+            max-width: 100%;
+            margin-top: 20px;
+        }
+        .download-button {
+            display: none;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>火車訂票</h1>
+        
+        <h2>可用火車</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>火車號碼</th>
+                    <th>出發站</th>
+                    <th>目的站</th>
+                    <th>出發時間</th>
+                    <th>到達時間</th>
+                    <th>票價</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>G100</td>
+                    <td>北京南</td>
+                    <td>上海虹橋</td>
+                    <td>09:00</td>
+                    <td>12:00</td>
+                    <td>$50</td>
+                </tr>
+                <tr>
+                    <td>G101</td>
+                    <td>北京南</td>
+                    <td>上海虹橋</td>
+                    <td>09:01</td>
+                    <td>12:01</td>
+                    <td>$50</td>
+                </tr>
+                <tr>
+                    <td>G102</td>
+                    <td>北京南</td>
+                    <td>廣州南</td>
+                    <td>09:02</td>
+                    <td>14:00</td>
+                    <td>$70</td>
+                </tr>
+                <tr>
+                    <td>G103</td>
+                    <td>上海虹橋</td>
+                    <td>北京南</td>
+                    <td>09:03</td>
+                    <td>13:00</td>
+                    <td>$70</td>
+                </tr>
+                <tr>
+                    <td>G104</td>
+                    <td>北京南</td>
+                    <td>廣州南</td>
+                    <td>09:04</td>
+                    <td>14:00</td>
+                    <td>$70</td>
+                </tr>
+                <tr>
+                    <td>G105</td>
+                    <td>上海虹橋</td>
+                    <td>北京南</td>
+                    <td>09:05</td>
+                    <td>13:00</td>
+                    <td>$70</td>
+                </tr>
+                <!-- 可添加更多火車資訊 -->
+            </tbody>
+        </table>
+
+        <h2>訂票</h2>
+        <form id="bookingForm" >
+            <label for="train_number">火車號碼:</label>
+            <select id="train_number" name="train_number" required>
+                <option value="">請選擇火車號碼</option>
+                <option value="G100">G100</option>
+                <option value="G101">G101</option>
+                <option value="G102">G102</option>
+                <option value="G103">G103</option>
+                <option value="G104">G104</option>
+                <option value="G105">G105</option>
+                <!-- 可添加更多火車號碼選項 -->
+            </select><br>
+
+            <label for="name">姓名:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">郵箱:</label>
+            <input type="text" id="email" name="email" required><br>
+
+            <input type="submit" value="確認訂票">
+        </form>
+
+        <img src="qqq/ticket_1.png" id="ticketG100" class="ticket-image">
+        <button class="download-button" id="downloadG100" onclick="downloadTicket('G100')">下載火車票</button>
+
+        <img src="qqq/ticket_2.png" id="ticketG101" class="ticket-image">
+        <button class="download-button" id="downloadG101" onclick="downloadTicket('G101')">下載火車票</button>
+
+        <img src="qqq/ticket_3.png" id="ticketG102" class="ticket-image">
+        <button class="download-button" id="downloadG102" onclick="downloadTicket('G102')">下載火車票</button>
+
+        <img src="qqq/ticket_4.png" id="ticketG103" class="ticket-image">
+        <button class="download-button" id="downloadG103" onclick="downloadTicket('G103')">下載火車票</button>
+
+        <img src="qqq/ticket_5.png" id="ticketG104" class="ticket-image">
+        <button class="download-button" id="downloadG104" onclick="downloadTicket('G104')">下載火車票</button>
+
+        <img src="qqq/ticket_6.png" id="ticketG105" class="ticket-image">
+        <button class="download-button" id="downloadG105" onclick="downloadTicket('G105')">下載火車票</button>
+    </div>
+
+    <script>
+        function downloadTicket(trainNumber) {
+            var ticketName = '';
+            switch (trainNumber) {
+                case 'G100':
+                    ticketName = 'ticket_1.png';
+                    break;
+                case 'G101':
+                    ticketName = 'ticket_2.png';
+                    break;
+                case 'G102':
+                    ticketName = 'ticket_3.png';
+                    break;
+                case 'G103':
+                    ticketName = 'ticket_4.png';
+                    break;
+                case 'G104':
+                    ticketName = 'ticket_5.png';
+                    break;
+                case 'G105':
+                    ticketName = 'ticket_6.png';
+                    break;
+                default:
+                    break;
+            }
+            var ticketUrl = 'qqq/' + ticketName;
+            var a = document.createElement('a');
+            a.href = ticketUrl;
+            a.download = ticketName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var trainNumber = document.getElementById('train_number').value;
+            if (trainNumber === 'G100') {
+                document.getElementById('ticketG100').style.display = 'block';
+                document.getElementById('downloadG100').style.display = 'block';
+            } else if (trainNumber === 'G101') {
+                document.getElementById('ticketG101').style.display = 'block';
+                document.getElementById('downloadG101').style.display = 'block';
+            } else if (trainNumber === 'G102') {
+                document.getElementById('ticketG102').style.display = 'block';
+                document.getElementById('downloadG102').style.display = 'block';
+            } else if (trainNumber === 'G103') {
+                document.getElementById('ticketG103').style.display = 'block';
+                document.getElementById('downloadG103').style.display = 'block';
+            } else if (trainNumber === 'G104') {
+                document.getElementById('ticketG104').style.display = 'block';
+                document.getElementById('downloadG104').style.display = 'block';
+            } else if (trainNumber === 'G105') {
+                document.getElementById('ticketG105').style.display = 'block';
+                document.getElementById('downloadG105').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
